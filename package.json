@@ -13,6 +13,7 @@
     "test": "node ./node_modules/vitest/vitest.mjs run",
     "test:watch": "node ./node_modules/vitest/vitest.mjs",
     "export:local": "& \"./scripts/export-local.ps1\"",
+    "tauri": "node ./node_modules/@tauri-apps/cli/tauri.js",
     "tauri:dev": "node ./node_modules/@tauri-apps/cli/tauri.js dev",
     "tauri:build": "node ./node_modules/@tauri-apps/cli/tauri.js build"
   },

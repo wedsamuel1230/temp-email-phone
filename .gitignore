@@ -10,5 +10,3 @@ src-tauri/gen/
 .DS_Store
 Thumbs.db
 
-# Keep memory bank tracked
-memory-bank/
