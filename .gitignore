@@ -1,0 +1,14 @@
+node_modules/
+.svelte-kit/
+.vscode/
+dist/
+build/
+coverage/
+*.log
+src-tauri/target/
+src-tauri/gen/
+.DS_Store
+Thumbs.db
+
+# Keep memory bank tracked
+memory-bank/

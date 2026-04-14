@@ -1,0 +1,62 @@
+name: Export Desktop Bundles
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Release ${{ matrix.target-name }} bundle
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target-name: windows
+            tauri-args: --config src-tauri/tauri.windows.conf.json --no-sign --bundles nsis
+          - os: macos-latest
+            target-name: macos-app-dmg
+            tauri-args: --bundles app,dmg --target universal-apple-darwin --no-sign
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install macOS Rust targets
+        if: matrix.os == 'macos-latest'
+        run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
+
+      - name: Cache Rust dependencies
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            src-tauri -> target
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build and publish to GitHub Release
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: app-v__VERSION__
+          releaseName: 'Temp Inbox Manager v__VERSION__'
+          releaseBody: 'Automated desktop bundles (.exe, .app, .dmg).'
+          releaseDraft: false
+          prerelease: false
+          args: ${{ matrix.tauri-args }}

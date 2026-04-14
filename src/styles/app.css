@@ -1,0 +1,35 @@
+:root {
+  --bg: oklch(0.97 0.01 80);
+  --surface: oklch(0.99 0.01 80);
+  --text: oklch(0.28 0.03 40);
+  --muted: oklch(0.56 0.03 40);
+  --line: oklch(0.85 0.03 80);
+  --brand: oklch(0.58 0.18 30);
+  --brand-soft: oklch(0.92 0.05 30);
+  --ok: oklch(0.65 0.14 145);
+  --warn: oklch(0.73 0.16 75);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1400px 900px at -20% -20%, oklch(0.93 0.08 45) 0%, transparent 60%),
+    radial-gradient(900px 700px at 120% 10%, oklch(0.94 0.06 130) 0%, transparent 65%),
+    var(--bg);
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
