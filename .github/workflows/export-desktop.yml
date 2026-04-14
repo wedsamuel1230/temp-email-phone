@@ -46,6 +46,10 @@ jobs:
           workspaces: |
             src-tauri -> target
 
+      - name: Install create-dmg
+        if: matrix.os == 'macos-latest'
+        run: brew install create-dmg
+
       - name: Install frontend dependencies
         run: npm ci
 
