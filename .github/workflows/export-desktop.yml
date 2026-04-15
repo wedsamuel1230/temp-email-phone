@@ -20,7 +20,7 @@ jobs:
             tauri-args: --config src-tauri/tauri.windows.conf.json --no-sign --bundles nsis,updater
           - os: macos-latest
             target-name: macos-app-dmg
-            tauri-args: --bundles app,dmg --target universal-apple-darwin --no-sign
+            tauri-args: --bundles app,dmg --target aarch64-apple-darwin --no-sign
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -38,7 +38,7 @@ jobs:
 
       - name: Install macOS Rust targets
         if: matrix.os == 'macos-latest'
-        run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
+        run: rustup target add aarch64-apple-darwin
 
       - name: Cache Rust dependencies
         uses: swatinem/rust-cache@v2

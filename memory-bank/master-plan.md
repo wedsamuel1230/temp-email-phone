@@ -12,3 +12,4 @@
 - Add persisted settings and event caching across sessions.
 - Maintain macOS export via GitHub Actions workflow while local Windows NSIS export artifact is already produced.
 - Validate pinned GitHub Actions release path on next tag push and confirm `.zip` updater asset appears beside `.exe`.
+- Validate the macOS `aarch64-apple-darwin` workflow run completes and uploads `.app`/`.dmg` assets.
